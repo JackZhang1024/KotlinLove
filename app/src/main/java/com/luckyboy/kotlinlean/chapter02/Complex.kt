@@ -26,7 +26,7 @@ class Complex(var real:Double, var imaginary:Double){
 }
 
 
-// 中缀表达式 只有一个参数 且用infix修饰方法
+// 中缀表达式 只有一个参数 且用infix修饰方法 这样不用括号或者. 来调用函数
 class Book{
     infix fun on(any: Any):Boolean{
         return false;
