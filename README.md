@@ -393,23 +393,163 @@
 
 7. lateinit 和 by lazy 
 
+   Lateinit 只能用于var   by lazy 只能用于 val 
+
+   ```kotlin 
+   class Dog {
+       lateinit var name: String
+       val color: String by lazy {
+           "yellow"
+       }
+       fun setDogName(name: String){
+           this.name = name
+       }
+   }
+   
+   var dog = Dog()
+   dog.setDogName("dahuang")
+   println(dog.color)//yellow
+   println(dog.name) //dahuang
+   ```
+
 8. 接口相关
 
-9. 代理相关
+   -  kotlin 接口
 
-10. 枚举
+   ```kotlin
+   interface ISwim {
+       fun swim()
+   }
+   
+   class Fish:ISwim {
+       override fun swim() {
+           println("我是鱼 我能游泳")
+       }
+   }
+   
+   class Penguin :ISwim {
+       override fun swim() {
+           println("我是企鹅 我能游泳")
+       }
+   }
+   
+   var fish = Fish()
+   fish.swim() // 我是鱼 我能游泳
+   var penguin = Penguin()
+   penguin.swim() //我是企鹅 我能游泳
+   ```
 
-11. 方法扩展
+   - kotlin 构造方法接口代理  
 
-12. 单例的实现
+     构造方法接口代理的意思就是说本来要实现的接口方法被主构造方法中的参数进行了接管，交给它们来进行接口方法的实现
 
-13. 密封类Sealed Class
+   ```kotlin 
+   interface Driver {
+       fun drive()
+   }
+   interface Writer {
+       fun write()
+   }
+   class PPTWriter:Writer {
+       override fun write() {
+           println("正在写PPT")
+       }
+   }
+   class CarDriver:Driver {
+       override fun drive() {
+           println("正在开车")
+       }
+   }
+   class SeniorManager(var driver:Driver, var writer:Writer):Driver by driver,Writer by writer{
+     
+   }
+   
+   var driver = CarDriver()
+   var writer = PPTWriter()
+   var seniorManager = SeniorManager(driver, writer)
+   seniorManager.drive() // 正在开车
+   seniorManager.write() // 正在写PPT
+   ```
 
-14. 伴生对象 companion 
+   - kotlin 属性代理
 
-15. @JvmField 和 @JvmStatic
+     一旦通过by来声明一个变量 实际就是一个傀儡 真正的实现是在代理的get方法中实现
 
-16. internal 关键字是什么意思
+   ```kotlin 
+   /* 成员变量代理 */
+   class Delegates {
+       val hello by lazy {
+           "hello wolrd"
+       }
+       val hello2 by X()
+       var hello3 by X()
+   }
+   // 代理对象需要实现set和get方法
+   class X {
+        private var value:String?=null
+        operator fun getValue(thisRef: Any?, property: KProperty<*>): String {
+            println("getValue: $thisRef->${property.name} ")
+            return value ?: ""
+        }
+       operator fun setValue(thisRef: Any?, property: KProperty<*>, value:String) {
+           println("setValue: $thisRef->${property.name}=$value")
+           this.value = value
+       }
+   }
+    
+   val delegates = Delegates() 
+   println(delegates.hello) // hello wolrd
+   println(delegates.hello2)// getValue: Delegates@41629346->hello2 
+   println(delegates.hello3)// getValue: Delegates@41629346->hello3 
+   delegates.hello3 = "hello world value3" // setValue: Delegates@41629346->hello3=hello world value3
+   println(delegates.hello3) // getValue: Delegates@41629346->hello3  // hello world value3
+   
+   ```
+
+9. 枚举
+
+   ```kotlin 
+   enum class SEASON{
+       SPRING,
+       SUMMER,
+       AUTUMN,
+       WINTER
+   }
+   
+   for (item in SEASON.values()){
+       println(item.name)
+   }
+   // SPRING SUMMER AUTUMN WINTER
+   ```
+
+10. 方法扩展
+
+    下面的例子就是给已有的类添加一些新的方法来实现某些功能  比如给字符串重复指定次数拼成字符串
+
+    ```kotlin 
+    fun String.multiply(int:Int):String{
+        val stringBuilder = StringBuilder()
+        for (i in 0 until int){
+            stringBuilder.append(this);
+        }
+        return stringBuilder.toString()
+    }
+    
+    val result = "abc".multiply(3)
+    println(result)  // abcabcabc
+    ```
+
+11. 单例的实现
+
+12. 密封类Sealed Class
+
+13. 伴生对象 companion 
+
+14. @JvmField 和 @JvmStatic
+
+15. internal 关键字是什么意思
+
+16. inner 内部类是什么意思
 
 17. inline 是什么意思
 
