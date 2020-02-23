@@ -21,7 +21,7 @@
 16. inline 是什么意思
 17. 高阶函数一 :  函数引用 
 18. 高阶函数二：map fold  foldRight filter filterIndexed takeWhile
-19.  use 是什么意思
+19. use 是什么意思
 20. apply, let , run 是什么意思
 21. with 是什么意思
 22. 尾递归
