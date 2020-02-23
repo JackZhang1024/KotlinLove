@@ -7,16 +7,19 @@ package com.luckyboy.kotlinlean.chapter04
 // 带有Receiver的引用 pdfPrinter::println
 
 fun main(args: Array<String>) {
-    args.forEach(::println)
+    val arr = arrayOf("Jack", "Rose", "Lily")
+    arr.forEach(::println)
     // 具名引用到具体的某一个函数 叫具名函数
     // 1. 包机函数
     val hello = Hello::world // 类名加::方法名 就可以限定某个方法了
+    hello.invoke(Hello())
+
     // 2. 类名引用
-    args.filter(String::isNotEmpty)
+    arr.filter(String::isNotEmpty)
 
     // 3. 调用者引用方式
     val pdfPrinter = PDFPrinter()
-    args.forEach(pdfPrinter::println)
+    arr.forEach(pdfPrinter::println)
 
 }
 

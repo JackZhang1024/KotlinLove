@@ -14,7 +14,7 @@ class Manager:Driver, Writer{
 
 }
 
-// 接口代理 省去了重新 drive 和 write 方法
+// 构造方法接口代理 省去了重新 drive 和 write 方法
 class SeniorManager(val driver: Driver, val writer: Writer):Driver by driver, Writer by writer
 
 

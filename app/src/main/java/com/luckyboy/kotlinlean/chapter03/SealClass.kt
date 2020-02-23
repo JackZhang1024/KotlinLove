@@ -8,7 +8,7 @@ sealed class PlayerCmd{
 
     class Seek(val position:Long = 0):PlayerCmd()
 
-    // 没有参数可以用 object 使用
+    // 没有参数 可以用 object 使用
     object Pause:PlayerCmd()
 
     object Resume:PlayerCmd()
