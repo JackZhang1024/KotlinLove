@@ -31,7 +31,8 @@ fun main(args: Array<String>) {
     println(CityMayor::class.java.simpleName);
     println(CityMayor::class.java.name);
     println(CityMayor::class.java.name.slice(0 until 3)); // [0, 3)  com
-
-
+    println(arrayOfChar.slice(0 until  1))
+    println("hello".slice(0..1))
+    println("hello".slice(0 until 1))
 
 }
