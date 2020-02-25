@@ -3,12 +3,12 @@ package com.luckyboy.kotlinlean.chapter03
 /* 非静态内部类持有外部类的状态 静态内部类不持有外部类的状态 */
 
 // 默认是静态内部类
-open class Outter{
+class Outter{
 
     class Inner{
 
         fun hello(){
-            println("Inner ")
+            println("静态内部类 Inner ")
         }
     }
 
@@ -55,7 +55,7 @@ fun main(args: Array<String>) {
     inner.hello()
 
     val view = View()
-    view.onClickListener = object :Outter(), OnClickListener{
+    view.onClickListener = object :OnClickListener{
         override fun onClick() {
 
         }

@@ -68,7 +68,7 @@ fun main(args: Array<String>) {
     println((0..6).map(::factorial).takeWhile { it%2==1});
 
 
-
+    arrayOf(1,2,3).map { i:Int ->i*10}.forEach(::println)
 
 }
 

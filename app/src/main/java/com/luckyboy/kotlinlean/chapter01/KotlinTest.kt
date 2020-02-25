@@ -44,7 +44,7 @@ class Dog {
         "yellow"
     }
 
-    fun setDogName(name: String){
+    fun setDogName(name: String) {
         this.name = name
     }
 }
@@ -54,17 +54,37 @@ interface ISwim {
     fun swim()
 }
 
-class Fish:ISwim {
+class Fish : ISwim {
     override fun swim() {
-       println("我是鱼 我能游泳")
+        println("我是鱼 我能游泳")
     }
 }
 
-class Penguin :ISwim {
+class Penguin : ISwim {
     override fun swim() {
-       println("我是企鹅 我能游泳")
+        println("我是企鹅 我能游泳")
     }
 }
+
+
+inline fun calculatePrint(funN: (Int, Int) -> Int) {
+    println("${funN(10, 5)}")
+}
+
+
+fun kLog(tag: String, value: String) {
+    println("$tag : $value")
+}
+
+
+class KLog {
+
+    fun kLog(tag: String, value: String) {
+        println("$tag : $value")
+    }
+
+}
+
 
 fun main(args: Array<String>) {
     val male = Male("Jack", "handsome", "play football")
@@ -79,7 +99,20 @@ fun main(args: Array<String>) {
         println(name)
     }
 
+    calculatePrint { a, b -> a + b }
+    calculatePrint { a, b -> a - b }
 
+    val logFunc = ::kLog
+    logFunc("KLOG", "Hello World")
+
+    //
+    val kLogFunc = KLog::kLog
+    val kLog = KLog()
+    kLogFunc(kLog, "KLOG", "Hello China")
+    //kLogFunc.call(kLog, "KLOG", "Hello China")
+
+    val iName = Int::class.java
+    println(iName.simpleName)
 
 }
 

@@ -10,19 +10,19 @@ import kotlinx.coroutines.runBlocking
 fun main()= runBlocking {
 
     launch {
-        delay(200L)
+        delay(2000L)
         println("Task from runBlocking")
     }
 
-    coroutineScope { // 创建一个协程作用域
-        launch {
-            delay(500L)
-            println("Task from nested launch")
-        }
-
-        delay(100L)
-        println("Task from corountine scope") // 这一行会在内嵌 launch 之前输出
-    }
+//    coroutineScope { // 创建一个协程作用域
+//        launch {
+//            delay(500L)
+//            println("Task from nested launch")
+//        }
+//
+//        delay(100L)
+//        println("Task from corountine scope") // 这一行会在内嵌 launch 之前输出
+//    }
 
     println("Coroutine scop is over") // 这一行在内嵌 launch 执行完毕后才输出
 

@@ -27,6 +27,6 @@ fun main(args: Array<String>) {
 
     val countryYard = CountryYard()
     countryYard.house
-
-
+    var forbiddenCity = ForbiddenCity()
 }
+
